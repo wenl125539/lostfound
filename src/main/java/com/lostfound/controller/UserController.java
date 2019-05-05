@@ -1,6 +1,5 @@
 package com.lostfound.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lostfound.pojo.User;
 import com.lostfound.service.UserService;
@@ -13,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,15 +57,23 @@ public class UserController {
     @ResponseBody
         @RequestMapping(value = "/login",method = {RequestMethod.POST})
         public Map<String,Object> login(@RequestBody JSONObject jsonObject){
-            map = null;
-            map = new HashMap<>();
-            User user = jsonObject.toJavaObject(User.class);
-            //获取用户
-            User user2 = userService.login(user);
-            if(user2 == null){
-                map.put("msg","用户名或密码错误");
-            }else{
-                map.put("user",user2);
+            try{
+                map = null;
+                map = new HashMap<>();
+                User user = jsonObject.toJavaObject(User.class);
+                //获取用户
+                User user2 = userService.login(user);
+                if(user2 == null){
+                    map.put("msg","0");
+                    map.put("error","用户名或密码错误");
+                }else{
+                    map.put("msg","1");
+                    map.put("user",user2);
+                }
+            }catch (Exception e){
+                map.put("msg","0");
+                map.put("error","用户名或密码错误");
+                return map;
             }
             return map;
         }
