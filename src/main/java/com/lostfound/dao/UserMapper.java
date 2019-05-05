@@ -14,4 +14,6 @@ public interface UserMapper {
     User login(User record);
 
     int addHead(User user);
+
+    int edit(User user);
 }

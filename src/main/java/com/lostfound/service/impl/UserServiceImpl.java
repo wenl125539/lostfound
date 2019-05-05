@@ -34,4 +34,10 @@ public class UserServiceImpl implements UserService {
         }
         return userMapper.addHead(user);
     }
+
+    @Override
+    public int edit(User user) {
+        return userMapper.edit(user);
+    }
+
 }

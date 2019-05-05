@@ -26,7 +26,12 @@ public class UserController {
         private UserService userService;
         private Map<String,Object> map = null;
 
-        @ResponseBody
+    /**
+     * 注册
+     * @param jsonObject
+     * @return
+     */
+    @ResponseBody
         @RequestMapping(value = "/register",method = {RequestMethod.POST})
         public Map<String,Object> register(@RequestBody JSONObject jsonObject){
             try {
@@ -46,7 +51,12 @@ public class UserController {
             return map;
         }
 
-        @ResponseBody
+    /**
+     * 登录
+     * @param jsonObject
+     * @return
+     */
+    @ResponseBody
         @RequestMapping(value = "/login",method = {RequestMethod.POST})
         public Map<String,Object> login(@RequestBody JSONObject jsonObject){
             map = null;
@@ -62,6 +72,12 @@ public class UserController {
             return map;
         }
 
+    /**
+     * 上传头像
+     * @param file
+     * @param username
+     * @return
+     */
         @ResponseBody
         @RequestMapping(value = "/upload/{username}",method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
         public Map<String,Object> upload(MultipartFile file, @PathVariable String username){
@@ -100,5 +116,31 @@ public class UserController {
            }
             return map;
         }
+
+
+    /**
+     * 用户修改资料
+     */
+    @ResponseBody
+    @RequestMapping(value = "/edit",method = {RequestMethod.POST})
+    public Map<String,Object> edit(@RequestBody JSONObject jsonObject){
+        try {
+            map = null;
+            map = new HashMap<>();
+            User user = jsonObject.toJavaObject(User.class);
+            int result = userService.edit(user);
+            if(result == 0){
+                map.put("msg","0");//返回0 没储存成功
+            }else{
+                map.put("msg","1");//返回1 储存成功
+            }
+        }catch (Exception e){
+            //抛出异常
+            map.put("msg","修改失败");
+            e.printStackTrace();
+            return map;
+        }
+        return map;
+    }
 
 }
