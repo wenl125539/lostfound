@@ -36,13 +36,14 @@ public class PickController {
             return map;
         }catch (Exception e){
             map.put("msg","0");
+            e.printStackTrace();
             return map;
         }
     }
 
 
     /**
-     * 添加捡到物品信息
+     * 更新捡到物品信息
      * @param pickIncrease
      * @return
      */
@@ -71,6 +72,10 @@ public class PickController {
         Map<String,Object> map = new HashMap<>();
         try {
             List<Pick> list = pickService.selectByUsername(pick);
+            if(list == null || list.size() == 0){
+                map.put("msg","0");
+                return map;
+            }
             map.put("msg",1);
             map.put("pick",list);
             return map;
@@ -82,7 +87,7 @@ public class PickController {
     }
 
     /**
-     * 根据用户查询 上传的物品
+     * 根据物品id查询 上传的物品
      * @param pick
      * @return
      */
@@ -127,6 +132,11 @@ public class PickController {
         }
     }
 
+    /**
+     * 根据id删除物品
+     * @param pick
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/deleteById", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> deleteById(@RequestBody Pick pick){
