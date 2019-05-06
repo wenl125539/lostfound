@@ -15,6 +15,12 @@ public class Pick {
 
     private String pickPhoto;
 
+    private String pickPhoto2;
+
+    private String pickPhoto3;
+
+    private String username;
+
     private String pname;
 
     private String exercise;
@@ -67,6 +73,30 @@ public class Pick {
 
     public void setPickPhoto(String pickPhoto) {
         this.pickPhoto = pickPhoto == null ? null : pickPhoto.trim();
+    }
+
+    public String getPickPhoto2() {
+        return pickPhoto2;
+    }
+
+    public void setPickPhoto2(String pickPhoto2) {
+        this.pickPhoto2 = pickPhoto2 == null ? null : pickPhoto2.trim();
+    }
+
+    public String getPickPhoto3() {
+        return pickPhoto3;
+    }
+
+    public void setPickPhoto3(String pickPhoto3) {
+        this.pickPhoto3 = pickPhoto3 == null ? null : pickPhoto3.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPname() {

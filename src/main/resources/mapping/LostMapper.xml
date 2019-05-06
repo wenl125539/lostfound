@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lostfound.dao.LostMapper">
+  <resultMap id="BaseResultMap" type="com.lostfound.pojo.Lost">
+    <id column="lost_id" jdbcType="BIGINT" property="lostId" />
+    <result column="lost_type" jdbcType="INTEGER" property="lostType" />
+    <result column="lost_name" jdbcType="VARCHAR" property="lostName" />
+    <result column="lost_trait" jdbcType="VARCHAR" property="lostTrait" />
+    <result column="lost_photo" jdbcType="VARCHAR" property="lostPhoto" />
+    <result column="lost_photo2" jdbcType="VARCHAR" property="lostPhoto2" />
+    <result column="lost_photo3" jdbcType="VARCHAR" property="lostPhoto3" />
+    <result column="lost_place" jdbcType="VARCHAR" property="lostPlace" />
+    <result column="lost_time" jdbcType="TIMESTAMP" property="lostTime" />
+    <result column="lname" jdbcType="VARCHAR" property="lname" />
+    <result column="exercise" jdbcType="VARCHAR" property="exercise" />
+    <result column="ltime" jdbcType="TIMESTAMP" property="ltime" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    lost_id, lost_type, lost_name, lost_trait, lost_photo, lost_photo2, lost_photo3, 
+    lost_place, lost_time, lname, exercise, ltime, username
+  </sql>
+  <select id="selectByKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lost
+    where lost_id = #{lostId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByKey" parameterType="java.lang.Long">
+    delete from lost
+    where lost_id = #{lostId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertLost" parameterType="com.lostfound.pojo.Lost">
+    insert into lost
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lostId != null">
+        lost_id,
+      </if>
+      <if test="lostType != null">
+        lost_type,
+      </if>
+      <if test="lostName != null">
+        lost_name,
+      </if>
+      <if test="lostTrait != null">
+        lost_trait,
+      </if>
+      <if test="lostPhoto != null">
+        lost_photo,
+      </if>
+      <if test="lostPhoto2 != null">
+        lost_photo2,
+      </if>
+      <if test="lostPhoto3 != null">
+        lost_photo3,
+      </if>
+      <if test="lostPlace != null">
+        lost_place,
+      </if>
+      <if test="lostTime != null">
+        lost_time,
+      </if>
+      <if test="lname != null">
+        lname,
+      </if>
+      <if test="exercise != null">
+        exercise,
+      </if>
+      <if test="ltime != null">
+        ltime,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lostId != null">
+        #{lostId,jdbcType=BIGINT},
+      </if>
+      <if test="lostType != null">
+        #{lostType,jdbcType=INTEGER},
+      </if>
+      <if test="lostName != null">
+        #{lostName,jdbcType=VARCHAR},
+      </if>
+      <if test="lostTrait != null">
+        #{lostTrait,jdbcType=VARCHAR},
+      </if>
+      <if test="lostPhoto != null">
+        #{lostPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="lostPhoto2 != null">
+        #{lostPhoto2,jdbcType=VARCHAR},
+      </if>
+      <if test="lostPhoto3 != null">
+        #{lostPhoto3,jdbcType=VARCHAR},
+      </if>
+      <if test="lostPlace != null">
+        #{lostPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="lostTime != null">
+        #{lostTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lname != null">
+        #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="exercise != null">
+        #{exercise,jdbcType=VARCHAR},
+      </if>
+      <if test="ltime != null">
+        #{ltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByKey" parameterType="com.lostfound.pojo.Lost">
+    update lost
+    <set>
+      <if test="lostType != null">
+        lost_type = #{lostType,jdbcType=INTEGER},
+      </if>
+      <if test="lostName != null">
+        lost_name = #{lostName,jdbcType=VARCHAR},
+      </if>
+      <if test="lostTrait != null">
+        lost_trait = #{lostTrait,jdbcType=VARCHAR},
+      </if>
+      <if test="lostPhoto != null">
+        lost_photo = #{lostPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="lostPhoto2 != null">
+        lost_photo2 = #{lostPhoto2,jdbcType=VARCHAR},
+      </if>
+      <if test="lostPhoto3 != null">
+        lost_photo3 = #{lostPhoto3,jdbcType=VARCHAR},
+      </if>
+      <if test="lostPlace != null">
+        lost_place = #{lostPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="lostTime != null">
+        lost_time = #{lostTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lname != null">
+        lname = #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="exercise != null">
+        exercise = #{exercise,jdbcType=VARCHAR},
+      </if>
+      <if test="ltime != null">
+        ltime = #{ltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lost_id = #{lostId,jdbcType=BIGINT}
+  </update>
+
+</mapper>

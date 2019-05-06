@@ -7,15 +7,11 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface LostMapper {
-    int deleteByPrimaryKey(Long lostId);
+    int deleteByKey(Long lostId);
 
-    int insert(Lost record);
+    int insertLost(Lost record);
 
-    int insertSelective(Lost record);
+    Lost selectByKey(Long lostId);
 
-    Lost selectByPrimaryKey(Long lostId);
-
-    int updateByPrimaryKeySelective(Lost record);
-
-    int updateByPrimaryKey(Lost record);
+    int updateByKey(Lost record);
 }

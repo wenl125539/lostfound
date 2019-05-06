@@ -13,6 +13,10 @@ public class Lost {
 
     private String lostPhoto;
 
+    private String lostPhoto2;
+
+    private String lostPhoto3;
+
     private String lostPlace;
 
     private Date lostTime;
@@ -22,6 +26,8 @@ public class Lost {
     private String exercise;
 
     private Date ltime;
+
+    private String username;
 
     public Long getLostId() {
         return lostId;
@@ -63,6 +69,22 @@ public class Lost {
         this.lostPhoto = lostPhoto == null ? null : lostPhoto.trim();
     }
 
+    public String getLostPhoto2() {
+        return lostPhoto2;
+    }
+
+    public void setLostPhoto2(String lostPhoto2) {
+        this.lostPhoto2 = lostPhoto2 == null ? null : lostPhoto2.trim();
+    }
+
+    public String getLostPhoto3() {
+        return lostPhoto3;
+    }
+
+    public void setLostPhoto3(String lostPhoto3) {
+        this.lostPhoto3 = lostPhoto3 == null ? null : lostPhoto3.trim();
+    }
+
     public String getLostPlace() {
         return lostPlace;
     }
@@ -101,5 +123,13 @@ public class Lost {
 
     public void setLtime(Date ltime) {
         this.ltime = ltime;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 }
