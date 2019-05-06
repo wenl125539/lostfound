@@ -1,14 +1,12 @@
-package com.lostfound.dao;
+package com.lostfound.service;
 
+import com.lostfound.pojo.Increase.PickIncrease;
 import com.lostfound.pojo.Pick;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
-@Repository
-public interface PickMapper {
+public interface PickService {
+
     /**
      * 根据key删除
      * @param pickId
@@ -21,7 +19,7 @@ public interface PickMapper {
      * @param record
      * @return
      */
-    int insertPick(Pick record);
+    int insertPick(PickIncrease record);
 
     /**
      * 根据id查找该物品所有信息
@@ -35,7 +33,7 @@ public interface PickMapper {
      * @param record
      * @return
      */
-    int updateByKey(Pick record);
+    int updateByKey(PickIncrease record);
 
     /**
      * 根据用户查找该用户上传 的 物品的所有信息
@@ -56,4 +54,5 @@ public interface PickMapper {
      * @return
      */
     int updateStatus(Long pickId);
+
 }

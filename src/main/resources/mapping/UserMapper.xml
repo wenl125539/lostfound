@@ -86,8 +86,8 @@
 
 
 
-  <!--UPDATE coupon_pool SET serialno = '20170319010010' , name = '名字10'  WHERE id = 10;-->
 
+<!--修改用户信息-->
   <update id="edit" parameterType="com.lostfound.pojo.User">
     update  tb_user set
     <trim prefix=" " suffix=" " suffixOverrides=",">

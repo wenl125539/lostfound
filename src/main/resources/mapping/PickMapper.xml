@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lostfound.dao.PickMapper">
+
   <resultMap id="BaseResultMap" type="com.lostfound.pojo.Pick">
     <id column="pick_id" jdbcType="BIGINT" property="pickId" />
     <result column="pick_type" jdbcType="INTEGER" property="pickType" />
@@ -153,4 +154,19 @@
   </update>
 
 
+  <select id="selectByUsername" parameterType="com.lostfound.pojo.Pick" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/> from  pick
+    where username=#{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllPick"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from pick
+  </select>
+
+  <update id="updateStatus" parameterType="java.lang.Long">
+    update   pick set STATUS = 1 where pick_id = #{pickId,jdbcType=BIGINT}
+  </update>
 </mapper>

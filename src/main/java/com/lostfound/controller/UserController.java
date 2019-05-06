@@ -3,6 +3,7 @@ package com.lostfound.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.lostfound.pojo.User;
 import com.lostfound.service.UserService;
+import com.lostfound.uitls.UploadFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ClassUtils;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/lostfound")
 public class UserController {
 
         @Autowired
@@ -91,19 +92,8 @@ public class UserController {
                map = null;
                map = new HashMap<>();
                if(file != null){
-                   //将文件转换为字节
-                   byte[] bytes = file.getBytes();
-                   //获取项目根目录
-                   String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();
-                   //根据时间给文件命名
-                   String path2 = new Date().getTime()+".jpg";
-                   //创建文件
-                   BufferedOutputStream stream = new BufferedOutputStream(
-                           new FileOutputStream(new File(path+"static/img/"+path2)));
-                   //将字节写进文件中
-                   stream.write(bytes);
-                   stream.close();
 
+                   String path2 = UploadFile.store(file);
                    //保存数据库
                    User user = new User();
                    user.setUsername(username);
@@ -113,7 +103,6 @@ public class UserController {
                        map.put("msg","保存出错");
                        return map;
                    }
-                   System.out.println("图片上传完毕，存储地址为："+path+"static/img/"+path2);
                    map.put("msg","保存成功");
                }
            }catch (Exception e){

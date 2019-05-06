@@ -27,6 +27,7 @@ public class Pick {
 
     private Integer status;
 
+
     public Long getPickId() {
         return pickId;
     }
@@ -121,5 +122,23 @@ public class Pick {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Pick{" +
+                "pickId=" + pickId +
+                ", pickType=" + pickType +
+                ", pickTrait='" + pickTrait + '\'' +
+                ", pickPlace='" + pickPlace + '\'' +
+                ", pickTime=" + pickTime +
+                ", pickPhoto='" + pickPhoto + '\'' +
+                ", pickPhoto2='" + pickPhoto2 + '\'' +
+                ", pickPhoto3='" + pickPhoto3 + '\'' +
+                ", username='" + username + '\'' +
+                ", pname='" + pname + '\'' +
+                ", exercise='" + exercise + '\'' +
+                ", status=" + status +
+                '}';
     }
 }
