@@ -27,6 +27,11 @@ public class PickServiceImpl implements PickService
 
     @Override
     public int insertPick(PickIncrease record) {
+
+        Pick pick = selectByKey(record.getPickId());
+        if(pick != null){
+            return 0;
+        }
              MultipartFile file = record.getFile();
              MultipartFile file2 = record.getFile2();
              MultipartFile file3 = record.getFile3();
@@ -42,9 +47,8 @@ public class PickServiceImpl implements PickService
                 String path = UploadFile.store(file3);
                 record.setPickPhoto3(path);
             }
-
            record.setPickTime(new Date());
-        return pickMapper.insertPick(record);
+            return pickMapper.insertPick(record);
     }
 
     @Override
@@ -54,6 +58,11 @@ public class PickServiceImpl implements PickService
 
     @Override
     public int updateByKey(PickIncrease record) {
+
+        Pick pick = selectByKey(record.getPickId());
+        if(pick == null){
+            return 0;
+        }
         MultipartFile file = record.getFile();
         MultipartFile file2 = record.getFile2();
         MultipartFile file3 = record.getFile3();

@@ -4,12 +4,14 @@ package com.lostfound.controller;
 import com.lostfound.pojo.Increase.PickIncrease;
 import com.lostfound.pojo.Pick;
 import com.lostfound.service.PickService;
+import com.lostfound.uitls.UploadFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +33,12 @@ public class PickController {
     public Map<String,Object> insertPick(PickIncrease pickIncrease){
         Map<String,Object> map = new HashMap<>();
         try {
-            pickService.insertPick(pickIncrease);
+            int i = pickService.insertPick(pickIncrease);
+            if(i == 0){
+                map.put("msg","0");
+                map.put("error","id重复");
+                return map;
+            }
             map.put("msg","1");
             return map;
         }catch (Exception e){
@@ -52,7 +59,12 @@ public class PickController {
     public Map<String,Object> updateByKey(PickIncrease pickIncrease){
         Map<String,Object> map = new HashMap<>();
         try {
-            pickService.updateByKey(pickIncrease);
+           int i =  pickService.updateByKey(pickIncrease);
+           if(i == 0){
+               map.put("msg","0");
+               map.put("error","物品不存在");
+               return map;
+           }
             map.put("msg","1");
             return map;
         }catch (Exception e){
