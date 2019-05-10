@@ -82,13 +82,13 @@ public class UserController {
      * @return
      */
         @ResponseBody
-        @RequestMapping(value = "/upload/{username}",method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
-        public Map<String,Object> upload(MultipartFile file, @PathVariable String username){
+        @RequestMapping(value = "/upload",method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+        public Map<String,Object> upload(MultipartFile file, String username){
            try {
                map = null;
                map = new HashMap<>();
-               if(file != null){
 
+               if(file != null){
                    String path2 = UploadFile.store(file);
                    //保存数据库
                    User user = new User();

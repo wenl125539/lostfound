@@ -167,6 +167,6 @@
   </select>
 
   <update id="updateStatus" parameterType="java.lang.Long">
-    update   pick set STATUS = 1 where pick_id = #{pickId,jdbcType=BIGINT}
+    update   pick set status = 1 where pick_id = #{pickId,jdbcType=BIGINT}
   </update>
 </mapper>

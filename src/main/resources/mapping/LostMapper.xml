@@ -15,17 +15,21 @@
     <result column="exercise" jdbcType="VARCHAR" property="exercise" />
     <result column="ltime" jdbcType="TIMESTAMP" property="ltime" />
     <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
+
   <sql id="Base_Column_List">
     lost_id, lost_type, lost_name, lost_trait, lost_photo, lost_photo2, lost_photo3, 
-    lost_place, lost_time, lname, exercise, ltime, username
+    lost_place, lost_time, lname, exercise, ltime, username, status
   </sql>
+
   <select id="selectByKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from lost
     where lost_id = #{lostId,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByKey" parameterType="java.lang.Long">
     delete from lost
     where lost_id = #{lostId,jdbcType=BIGINT}
@@ -73,6 +77,9 @@
       <if test="username != null">
         username,
       </if>
+      <if test="status != null">
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="lostId != null">
@@ -114,8 +121,12 @@
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
+
   <update id="updateByKey" parameterType="com.lostfound.pojo.Lost">
     update lost
     <set>
@@ -155,8 +166,26 @@
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
     </set>
     where lost_id = #{lostId,jdbcType=BIGINT}
   </update>
 
+  <select id="selectByUsername" parameterType="com.lostfound.pojo.Lost" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/> from  lost
+    where username=#{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllLost"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lost
+  </select>
+
+  <update id="updateStatus" parameterType="java.lang.Long">
+    update  lost set status = 1 where lost_id = #{lost_id,jdbcType=BIGINT}
+  </update>
 </mapper>

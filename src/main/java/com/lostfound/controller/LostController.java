@@ -1,9 +1,10 @@
 package com.lostfound.controller;
 
 
-import com.lostfound.pojo.Increase.PickIncrease;
-import com.lostfound.pojo.Pick;
-import com.lostfound.service.PickService;
+
+import com.lostfound.pojo.Increase.LostIncrease;
+import com.lostfound.pojo.Lost;
+import com.lostfound.service.LostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,22 +17,22 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/found")
-public class PickController {
+@RequestMapping(value = "/lost")
+public class LostController {
     @Autowired
-    private PickService pickService;
+    private LostService lostService;
 
     /**
      * 添加捡到物品信息
-     * @param pickIncrease
+     * @param lostIncrease
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/insertPick")
-    public Map<String,Object> insertPick(PickIncrease pickIncrease){
+    @RequestMapping(value = "/insertLost")
+    public Map<String,Object> insertPick(LostIncrease lostIncrease){
         Map<String,Object> map = new HashMap<>();
         try {
-            int i = pickService.insertPick(pickIncrease);
+            int i = lostService.insertLost(lostIncrease);
             if(i == 0){
                 map.put("msg","0");
                 map.put("error","id重复");
@@ -49,22 +50,23 @@ public class PickController {
 
     /**
      * 更新捡到物品信息
-     * @param pickIncrease
+     * @param lostIncrease
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/updateByKey")
-    public Map<String,Object> updateByKey(PickIncrease pickIncrease){
+    public Map<String,Object> updateByKey(LostIncrease lostIncrease){
         Map<String,Object> map = new HashMap<>();
         try {
-           int i =  pickService.updateByKey(pickIncrease);
-           if(i == 0){
-               map.put("msg","0");
-               map.put("error","物品不存在");
-               return map;
-           }
-            map.put("msg","1");
-            return map;
+            int i =  lostService.updateByKey(lostIncrease);
+            if(i == 0){
+                map.put("msg","0");
+                map.put("error","物品不存在");
+                return map;
+            }else{
+                map.put("msg","1");
+                return map;
+            }
         }catch (Exception e){
             map.put("msg","0");
             return map;
@@ -73,15 +75,15 @@ public class PickController {
 
     /**
      * 根据用户查询 上传的物品
-     * @param pick
+     * @param lost
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/selectByUser", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
-    public Map<String,Object> selectByUser(@RequestBody Pick pick){
+    public Map<String,Object> selectByUser(@RequestBody Lost lost){
         Map<String,Object> map = new HashMap<>();
         try {
-            List<Pick> list = pickService.selectByUsername(pick);
+            List<Lost> list = lostService.selectByUsername(lost);
             if(list == null || list.size() == 0){
                 map.put("msg","0");
                 return map;
@@ -98,22 +100,22 @@ public class PickController {
 
     /**
      * 根据物品id查询 上传的物品
-     * @param pick
+     * @param lost
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/selectByKey", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
-    public Map<String,Object> selectByKey(@RequestBody Pick pick){
+    public Map<String,Object> selectByKey(@RequestBody Lost lost){
         Map<String,Object> map = new HashMap<>();
         try {
 
-            Pick pick1= pickService.selectByKey(pick.getPickId());
-            if(pick1 == null){
+            Lost lost1= lostService.selectByKey(lost.getLostId());
+            if(lost1 == null){
                 map.put("msg",0);
                 return map;
             }
             map.put("msg",1);
-            map.put("pick",pick1);
+            map.put("pick",lost1);
             return map;
         }catch (Exception e){
             e.printStackTrace();
@@ -127,11 +129,16 @@ public class PickController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/selectAllPick", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/selectAllLost", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> selectAllPick(){
         Map<String,Object> map = new HashMap<>();
         try {
-            List<Pick> list = pickService.selectAllPick();
+            List<Lost> list = lostService.selectAllLost();
+            if(list.size() == 0 || list == null){
+                map.put("msg","0");
+                map.put("error","没有丢失物品");
+                return map;
+            }
             map.put("msg",1);
             map.put("pick",list);
             return map;
@@ -144,15 +151,15 @@ public class PickController {
 
     /**
      * 根据id删除物品
-     * @param pick
+     * @param lost
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/deleteById", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
-    public Map<String,Object> deleteById(@RequestBody Pick pick){
+    public Map<String,Object> deleteById(@RequestBody Lost lost){
         Map<String,Object> map = new HashMap<>();
         try {
-            pickService.deleteByKey(pick.getPickId());
+            lostService.deleteByKey(lost.getLostId());
             map.put("msg",1);
             return map;
         }catch (Exception e){
@@ -164,15 +171,15 @@ public class PickController {
 
     /**
      * 根据id改变物品 招领状态
-     * @param pick
+     * @param lost
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/updateStatus", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
-    public Map<String,Object> updateStatus(@RequestBody Pick pick){
+    public Map<String,Object> updateStatus(@RequestBody Lost lost){
         Map<String,Object> map = new HashMap<>();
         try {
-            pickService.updateStatus(pick.getPickId());
+            lostService.updateStatus(lost.getLostId());
             map.put("msg",1);
             return map;
         }catch (Exception e){
