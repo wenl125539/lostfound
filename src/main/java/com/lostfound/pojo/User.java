@@ -3,7 +3,7 @@ package com.lostfound.pojo;
 import java.util.Date;
 
 public class User {
-    private Long id;
+    private Long user_id;
 
     private String username;
 
@@ -11,7 +11,7 @@ public class User {
 
     private String phone;
 
-    private String email;
+    private String e_mail;
 
     private Integer permission;
 
@@ -20,11 +20,11 @@ public class User {
 
 
     public Long getId() {
-        return id;
+        return user_id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.user_id = id;
     }
 
     public String getUsername() {
@@ -52,11 +52,11 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return e_mail;
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.e_mail = email == null ? null : email.trim();
     }
 
     public Integer getPermission() {
