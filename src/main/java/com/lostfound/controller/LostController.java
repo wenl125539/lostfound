@@ -17,13 +17,13 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/lost")
+@RequestMapping(value = "/lostfound")
 public class LostController {
     @Autowired
     private LostService lostService;
 
     /**
-     * 添加捡到物品信息
+     * 添加丢失物品信息
      * @param lostIncrease
      * @return
      */
@@ -49,12 +49,12 @@ public class LostController {
 
 
     /**
-     * 更新捡到物品信息
+     * 更新丢失物品信息
      * @param lostIncrease
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/updateByKey")
+    @RequestMapping(value = "/updateByLostKey")
     public Map<String,Object> updateByKey(LostIncrease lostIncrease){
         Map<String,Object> map = new HashMap<>();
         try {
@@ -74,12 +74,12 @@ public class LostController {
     }
 
     /**
-     * 根据用户查询 上传的物品
+     * 根据用户查询 上传丢失的物品
      * @param lost
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/selectByUser", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/selectByLostUser", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> selectByUser(@RequestBody Lost lost){
         Map<String,Object> map = new HashMap<>();
         try {
@@ -99,12 +99,12 @@ public class LostController {
     }
 
     /**
-     * 根据物品id查询 上传的物品
+     * 根据物品id查询 上传丢失的物品
      * @param lost
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/selectByKey", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/selectByLostKey", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> selectByKey(@RequestBody Lost lost){
         Map<String,Object> map = new HashMap<>();
         try {
@@ -155,7 +155,7 @@ public class LostController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/deleteById", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/deleteByLostKey", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> deleteById(@RequestBody Lost lost){
         Map<String,Object> map = new HashMap<>();
         try {
@@ -175,7 +175,7 @@ public class LostController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/updateStatus", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/updateLostStatus", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> updateStatus(@RequestBody Lost lost){
         Map<String,Object> map = new HashMap<>();
         try {

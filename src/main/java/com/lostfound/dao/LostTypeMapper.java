@@ -4,18 +4,17 @@ import com.lostfound.pojo.LostType;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface LostTypeMapper {
-    int deleteByPrimaryKey(Integer typeid);
 
-    int insert(LostType record);
 
-    int insertSelective(LostType record);
 
-    LostType selectByPrimaryKey(Integer typeid);
+    int insertType(LostType record);
 
-    int updateByPrimaryKeySelective(LostType record);
+    List<LostType> selectAllType();
 
-    int updateByPrimaryKey(LostType record);
+    int deleteType(LostType record);
 }

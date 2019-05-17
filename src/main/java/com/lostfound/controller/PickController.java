@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/found")
+@RequestMapping(value = "/lostfound")
 public class PickController {
     @Autowired
     private PickService pickService;
@@ -53,7 +53,7 @@ public class PickController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/updateByKey")
+    @RequestMapping(value = "/updateByPickKey")
     public Map<String,Object> updateByKey(PickIncrease pickIncrease){
         Map<String,Object> map = new HashMap<>();
         try {
@@ -77,7 +77,7 @@ public class PickController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/selectByUser", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/selectByPickUser", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> selectByUser(@RequestBody Pick pick){
         Map<String,Object> map = new HashMap<>();
         try {
@@ -102,7 +102,7 @@ public class PickController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/selectByKey", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/selectByPickKey", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> selectByKey(@RequestBody Pick pick){
         Map<String,Object> map = new HashMap<>();
         try {
@@ -148,7 +148,7 @@ public class PickController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/deleteById", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/deleteByPickKey", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> deleteById(@RequestBody Pick pick){
         Map<String,Object> map = new HashMap<>();
         try {
@@ -168,7 +168,7 @@ public class PickController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/updateStatus", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/updatePickStatus", method = {RequestMethod.POST},produces = "application/json;charset=UTF-8")
     public Map<String,Object> updateStatus(@RequestBody Pick pick){
         Map<String,Object> map = new HashMap<>();
         try {

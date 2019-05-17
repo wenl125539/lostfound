@@ -85,8 +85,6 @@
   </update>
 
 
-
-
 <!--修改用户信息-->
   <update id="edit" parameterType="com.lostfound.pojo.User">
     update  tb_user set
